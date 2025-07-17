@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.js';
 import careersRoutes from './routes/careers.routes.js';
 
+
 connectDB(); 
 const app = express();
 
