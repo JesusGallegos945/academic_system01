@@ -33,7 +33,7 @@ const careerSchema = new mongoose.Schema({
   modality: {
     type: String,
     required: true,
-    enum: ['Presencial', 'En línea', 'Híbrido', 'Dual']
+    enum: ['Presencial', 'En linea', 'Hibrido', 'Dual']
   },
   creation_date: {
     type: Date,

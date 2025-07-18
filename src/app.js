@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api', authRoutes);
-app.use('api', careersRoutes);
+app.use('/api', careersRoutes);
 
 
 export default app;
