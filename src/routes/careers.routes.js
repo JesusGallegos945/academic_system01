@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 // Rutas para careers
-router.post('/create-careers', authRequired, createCareer);
+router.post('/create-careers', createCareer);
 router.get('/get-careers', getCareers);
 router.get('/get-careers/:id', getCareer);
 router.put('/update-careers/:id', authRequired, updateCareer);

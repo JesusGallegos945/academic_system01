@@ -4,7 +4,7 @@ import { createdAccessToken } from "../libs/jwt.js";
 
 
 export const register = async (req, res) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, role } = req.body;
 
   try {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -12,11 +12,16 @@ export const register = async (req, res) => {
       username,
       email,
       password: passwordHash,
+      role // ahora se guarda el rol
     });
     const userSaved = await newUser.save();
     const token = await createdAccessToken({ id: userSaved._id });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: false // Cambia a true si usas https en producción
+    });
     res.json({
       id: userSaved._id,
       username: userSaved.username,
@@ -44,14 +49,18 @@ export const login = async (req, res) => {
 
     const token = await createdAccessToken({ id: userFound._id });
 
-    res.cookie("token", token),
-      res.json({
-        id: userFound._id,
-        username: userFound.username,
-        email: userFound.email,
-        createdAT: userFound.createdAt,
-        updatedAT: userFound.updateAt,
-      });
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: false // Cambia a true si usas https en producción
+    });
+    res.json({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+      createdAT: userFound.createdAt,
+      updatedAT: userFound.updateAt,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

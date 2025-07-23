@@ -1,18 +1,17 @@
 import mongoose from 'mongoose';
 
+const coordinatorSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true }
+}, { _id: false });
+
 const careerSchema = new mongoose.Schema({
   career_code: {
     type: String,
     required: true,
     unique: true,
     trim: true,
-    uppercase: true,
-    validate: {
-      validator: function(v) {
-        return /^[A-Z]{3}\d{3}$/.test(v); // Ejemplo: DSM001
-      },
-      message: props => `${props.value} no es un código válido (formato: LLLNNN)`
-    }
+    uppercase: true
   },
   career_name: {
     type: String,
@@ -43,19 +42,7 @@ const careerSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  coordinator: {
-    type: new mongoose.Schema({
-      name: {
-        type: String,
-        required: true
-      },
-      email: {
-        type: String,
-        required: true,
-        match: [/.+\@.+\..+/, 'Por favor ingresa un email válido']
-      }
-    }, { _id: false })
-  }
+  coordinator: coordinatorSchema
 }, {
   timestamps: true
 });
