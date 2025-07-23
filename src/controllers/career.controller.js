@@ -121,6 +121,9 @@ export const getCareer = async (req, res) => {
 
 export const updateCareer = async (req, res) => {
   try {
+    if (!req.user || req.user.role !== 'teacher') {
+      return res.status(403).json({ message: 'No tienes permisos para esta acción' });
+    }
     // Validación de ID
     if (!req.params.id || !/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ 
@@ -172,6 +175,9 @@ export const updateCareer = async (req, res) => {
 
 export const deleteCareer = async (req, res) => {
   try {
+    if (!req.user || req.user.role !== 'teacher') {
+      return res.status(403).json({ message: 'No tienes permisos para esta acción' });
+    }
     // Validación de ID
     if (!req.params.id || !/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ 

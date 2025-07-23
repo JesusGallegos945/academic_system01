@@ -15,7 +15,7 @@ export const register = async (req, res) => {
       role // ahora se guarda el rol
     });
     const userSaved = await newUser.save();
-    const token = await createdAccessToken({ id: userSaved._id });
+    const token = await createdAccessToken({ id: userSaved._id, role: userSaved.role });
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -47,7 +47,7 @@ export const login = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credential, try again" });
 
-    const token = await createdAccessToken({ id: userFound._id });
+    const token = await createdAccessToken({ id: userFound._id, role: userFound.role });
 
     res.cookie("token", token, {
       httpOnly: true,

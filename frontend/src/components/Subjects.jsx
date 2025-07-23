@@ -119,7 +119,7 @@ const Subjects = () => {
             <Stack spacing={2}>
               <TextField name="name" label="Nombre de la materia" value={form.name} onChange={handleChange} required fullWidth />
               <TextField name="code" label="Código" value={form.code} onChange={handleChange} required fullWidth />
-              <TextField name="credits" type="number" label="Créditos" value={form.credits} onChange={handleChange} required fullWidth inputProps={{ min: 1, max: 20 }} />
+              <TextField name="credits" type="number" label="Acreditación" value={form.credits} onChange={handleChange} required fullWidth inputProps={{ min: 1, max: 20 }} />
               <Button type="submit" variant="contained" color="primary" size="large">Crear</Button>
             </Stack>
           </Box>
@@ -135,7 +135,7 @@ const Subjects = () => {
                     <Stack spacing={2}>
                       <TextField name="name" label="Nombre de la materia" value={editForm.name} onChange={handleEditChange} required fullWidth />
                       <TextField name="code" label="Código" value={editForm.code} onChange={handleEditChange} required fullWidth />
-                      <TextField name="credits" type="number" label="Créditos" value={editForm.credits} onChange={handleEditChange} required fullWidth inputProps={{ min: 1, max: 20 }} />
+                      <TextField name="credits" type="number" label="Acreditación" value={editForm.credits} onChange={handleEditChange} required fullWidth inputProps={{ min: 1, max: 20 }} />
                       <Stack direction="row" spacing={2}>
                         <Button type="submit" variant="contained" color="primary">Guardar</Button>
                         <Button type="button" variant="outlined" color="secondary" onClick={() => setEditId(null)}>Cancelar</Button>
@@ -145,7 +145,7 @@ const Subjects = () => {
                 ) : (
                   <>
                     <Typography variant="h6" fontWeight={700}>{subject.name}</Typography>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>Código: {subject.code} | Créditos: {subject.credits}</Typography>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>Código: {subject.code} | Acreditación: {subject.credits}</Typography>
                     <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
                       <Button variant="outlined" color="primary" onClick={() => handleEdit(subject)}>Editar</Button>
                       <Button variant="outlined" color="error" onClick={() => handleDelete(subject._id || subject.id)}>Eliminar</Button>

@@ -84,9 +84,12 @@ const Careers = () => {
     setError('');
     setSuccess('');
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch(`${API_URL}/delete-careers/${id}`, {
         method: 'DELETE',
-        credentials: 'include'
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
       if (!res.ok) throw new Error();
       setSuccess('Carrera eliminada');
@@ -114,9 +117,13 @@ const Careers = () => {
     setError('');
     setSuccess('');
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch(`${API_URL}/update-careers/${editId}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({
           career_code: editForm.career_code,
           career_name: editForm.career_name,
@@ -127,8 +134,7 @@ const Careers = () => {
             name: editForm.coordinator_name,
             email: editForm.coordinator_email
           }
-        }),
-        credentials: 'include'
+        })
       });
       if (!res.ok) throw new Error();
       setEditId(null); setEditForm({});
